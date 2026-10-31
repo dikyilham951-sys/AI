@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10131b">
+  <title>AI Agent Lokal</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="AI Agent Lokal beranda">
+        <span class="brand-mark">A</span>
+        <span>Agent<span class="brand-light">.local</span></span>
+      </a>
+      <span class="local-label"><span class="status-dot"></span> BERJALAN LOKAL</span>
+    </header>
+
+    <section id="auth-view" class="auth-layout">
+      <div class="intro">
+        <p class="eyebrow">PRIVATE WORKSPACE</p>
+        <h1>Asisten AI.<br><span>Di komputer sendiri.</span></h1>
+        <p class="intro-copy">Percakapan diproses oleh model lokal. Password akun di-hash sebelum masuk database.</p>
+        <div class="feature-list">
+          <div><span class="feature-icon">✓</span><span>Password tidak dikirim ke model AI</span></div>
+          <div><span class="feature-icon">✓</span><span>Riwayat chat disimpan di SQLite lokal</span></div>
+          <div><span class="feature-icon">✓</span><span>Tidak memerlukan API key berbayar</span></div>
+        </div>
+      </div>
+
+      <section class="auth-card" aria-labelledby="auth-title">
+        <div class="auth-tabs" role="tablist" aria-label="Pilih autentikasi">
+          <button class="tab active" id="tab-login" type="button" role="tab" aria-selected="true">Login</button>
+          <button class="tab" id="tab-register" type="button" role="tab" aria-selected="false">Daftar</button>
+        </div>
+        <div class="card-inner">
+          <p class="eyebrow">ACCOUNT ACCESS</p>
+          <h2 id="auth-title">Masuk ke akun</h2>
+          <p class="muted" id="auth-desc">Lanjutkan ke ruang chat pribadi.</p>
+          <form id="auth-form">
+            <label for="username">Username</label>
+            <input id="username" name="username" type="text" minlength="3" maxlength="24" autocomplete="username" placeholder="contoh: ilham_01" required>
+            <label for="password">Password</label>
+            <input id="password" name="password" type="password" minlength="12" maxlength="72" autocomplete="current-password" placeholder="Minimal 12 karakter" required>
+            <button class="primary-button" id="auth-submit" type="submit">Masuk <span>→</span></button>
+          </form>
+          <p class="form-note">Gunakan password khusus untuk aplikasi ini, bukan password akun lain.</p>
+          <p id="auth-status" class="status-message" role="status" aria-live="polite"></p>
+        </div>
+      </section>
+    </section>
+
+    <section id="chat-view" class="chat-layout hidden">
+      <aside class="sidebar">
+        <div class="side-heading">WORKSPACE</div>
+        <div class="side-card">
+          <span class="side-icon">✦</span>
+          <div><strong>AI Assistant</strong><small>Qwen3 · Local model</small></div>
+        </div>
+        <div class="privacy-note">
+          <span class="privacy-dot"></span>
+          <div><strong>Private session</strong><p>Data akun dan chat berada di komputer ini.</p></div>
+        </div>
+        <button id="logout-button" class="logout-button" type="button">Keluar akun <span>↗</span></button>
+      </aside>
+
+      <section class="chat-panel">
+        <div class="chat-header">
+          <div><p class="eyebrow">YOUR PERSONAL AGENT</p><h2>Ruang percakapan</h2></div>
+          <span id="user-label" class="user-chip">User</span>
+        </div>
+        <div id="messages" class="messages" aria-live="polite">
+          <div class="welcome-message">
+            <div class="welcome-symbol">✦</div>
+            <h3>Ada yang bisa dibantu?</h3>
+            <p>Tulis pertanyaan atau tugas di bawah. Model AI berjalan di komputer ini.</p>
+          </div>
+        </div>
+        <form id="chat-form" class="composer">
+          <label class="sr-only" for="message-input">Pesan untuk AI</label>
+          <textarea id="message-input" rows="1" maxlength="2000" placeholder="Ketik pesan..." required></textarea>
+          <button id="send-button" class="send-button" type="submit" aria-label="Kirim pesan">↑</button>
+        </form>
+        <p class="composer-note">AI bisa keliru. Jangan kirim password, OTP, atau informasi rahasia.</p>
+        <p id="chat-status" class="chat-status" role="status" aria-live="polite"></p>
+      </section>
+    </section>
+    <footer class="footer">LOCAL AI WORKSPACE <span>•</span> Password hashing with bcrypt</footer>
+  </main>
+</body>
+</html>
